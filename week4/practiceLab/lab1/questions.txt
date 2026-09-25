@@ -1,0 +1,51 @@
+Question 1.1 — Scheduling
+
+Thread IDs can appear in a non-sequential order because 
+the operating system scheduler decides when each thread gets CPU time. 
+Threads are executed concurrently, so the thread with logical ID 3 may 
+run before thread 1 or 2. The scheduler considers factors such as CPU 
+availability, thread priority, and current system load. At the hardware 
+level, multiple CPU cores can execute different threads simultaneously, 
+while the OS scheduler assigns runnable threads to these cores. Therefore, 
+the exact execution order is not deterministic and may change between runs.
+
+
+Question 1.2 — Oversubscription
+
+Oversubscription occurs when the number of software 
+threads exceeds the number of available physical CPU 
+cores. The operating system must then frequently perform 
+context switching between runnable threads. During a context 
+switch, the CPU state of the current thread, including registers 
+and execution information, must be preserved so another thread can run.
+Frequent switching creates overhead because the CPU spends time managing 
+threads instead of performing useful computations. Oversubscription can also
+cause cache thrashing: threads repeatedly replace each other's data in CPU caches, 
+resulting in more cache misses and slower memory access. Therefore, increasing the number 
+of threads beyond the hardware capacity can reduce performance.
+
+Question 1.3 — Barriers
+
+In OpenMP, an implicit barrier at the end of a parallel region ensures 
+that all worker threads finish their assigned work before execution continues 
+beyond the parallel region. This synchronization prevents one thread from using 
+incomplete or inconsistent results produced by another thread. Without the barrier, 
+a thread could continue to a subsequent code block while other threads are still 
+modifying shared data. This could cause race conditions, incorrect results, or 
+data inconsistencies. The barrier therefore provides a synchronization point 
+where all threads must arrive before the program proceeds.
+
+Question 1.4 — Architectural Mapping
+
+A hardware execution thread (SMT/Hyper-Threading) is a 
+CPU-level execution context that allows one physical CPU 
+core to execute instructions from multiple hardware threads. 
+An operating system kernel thread is a schedulable software 
+entity managed by the operating system, which assigns it CPU 
+time on available hardware threads. A green or virtual thread 
+is managed primarily by a programming language runtime rather 
+than directly by the OS; many virtual threads can be multiplexed 
+onto a smaller number of OS kernel threads. Therefore, hardware 
+threads represent CPU execution capacity, kernel threads 
+represent OS-managed execution units, and green/virtual 
+threads provide a lightweight software abstraction for concurrent tasks.

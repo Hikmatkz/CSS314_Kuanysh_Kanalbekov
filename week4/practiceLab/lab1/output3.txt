@@ -1,0 +1,11 @@
+--- Running 8 threads ---
+Thread 2 finished | Native TID: 2498141
+Thread 5 finished | Native TID: 2498144
+Thread 0 finished | Native TID: 2498139
+Thread 7 finished | Native TID: 2498146
+Thread 6 finished | Native TID: 2498145
+Thread 3 finished | Native TID: 2498142
+Thread 4 finished | Native TID: 2498143
+Thread 1 finished | Native TID: 2498140
+Execution time: 3.709 seconds
+
